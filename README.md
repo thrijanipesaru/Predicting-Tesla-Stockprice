@@ -10,7 +10,6 @@ from plotly.offline import plot
 #for offline plotting
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 init_notebook_mode(connected=True)
-
 In [2]:
 tesla = pd.read_csv(r'C:\Users\18281\Downloads\Thrijani\tesla.csv')
 tesla.head()
@@ -22,6 +21,7 @@ Date Open High Low Close Adj Close Volume
 3 02-07-2010 23.000000 23.10 18.709999 19.200001 19.200001 5139800
 4 06-07-2010 20.000000 20.00 15.830000 16.110001 16.110001 6866900
 In [3]:
+tesla.info()
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 2193 entries, 0 to 2192
 Data columns (total 7 columns):
@@ -37,7 +37,6 @@ Data columns (total 7 columns):
 dtypes: float64(5), int64(1), object(1)
 memory usage: 120.1+ KB
 In [4]:
-xxxxxxxxxx
 tesla['Date']=pd.to_datetime(tesla['Date'])
 In [5]:
 print(f'Dataframe contains stock prices between{tesla.Date.min()}){tesla.Date.max()}')
@@ -87,7 +86,6 @@ In [9]:
 #plot(plot) #plottingoffline
 iplot(plot)
 In [10]:
-xxxxxxxxxx
 #Building the regression model
 from sklearn.model_selection import train_test_split
 #for preprocessing
@@ -101,16 +99,13 @@ In [12]:
 X = np.array(tesla.index).reshape(-1,1)
 Y = tesla['Close']
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=101)
-
 In [13]:
-xxxxxxxxxx
 #feature scaling
 scaler = StandardScaler().fit(X_train)
-
 In [14]:
+xxxxxxxxxx
 from sklearn.linear_model import LinearRegression
 In [17]:
-xxxxxxxxxx
 #creating a linear model
 lm = LinearRegression()
 lm.fit(X_train, Y_train)
@@ -141,73 +136,8 @@ scores = f'''
 {'Metric'.1just(10)}{'Train'.center(20)}{'test'.center(20)}
 {'r2_score'.1just(10)}{r2_score(Y_train,lm.predict(X_train))}\t{r2_score(Y_test,lm.predict(X_test))}
 {'MSE'.1just(10)}{mse(Y_train,lm.predict(X_train))}\t{mse(Y_test,lm.predict(X_test))}
+'''
 print(scores)
-File "C:\Users\18281\AppData\Local\Temp/ipykernel_33044/3581708429.py", line 3
-{'Metric'.1just(10)}{'Train'.center(20)}{'test'.center(20)}
-^
-SyntaxError: f-string: invalid syntax
-In [ ]:
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-%matplotlib inline
-import chart_studio
-import chart_studio.plotly as py
-import plotly.graph_objs as go
-from plotly.offline import plot
-In [2]:
-Out[2]:
-Date Open High Low Close Adj Close Volume
-0 29-06-2010 19.000000 25.00 17.540001 23.889999 23.889999 18766300
-1 30-06-2010 25.790001 30.42 23.299999 23.830000 23.830000 17187100
-2 01-07-2010 25.000000 25.92 20.270000 21.959999 21.959999 8218800
-3 02-07-2010 23.000000 23.10 18.709999 19.200001 19.200001 5139800
-4 06-07-2010 20.000000 20.00 15.830000 16.110001 16.110001 6866900
-In [3]:
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 2193 entries, 0 to 2192
-Data columns (total 7 columns):
-# Column Non-Null Count Dtype
---- ------ -------------- -----
-0 Date 2193 non-null object
-1 Open 2193 non-null float64
-2 High 2193 non-null float64
-3 Low 2193 non-null float64
-4 Close 2193 non-null float64
-5 Adj Close 2193 non-null float64
-6 Volume 2193 non-null int64
-dtypes: float64(5), int64(1), object(1)
-memory usage: 120.1+ KB
-In [4]:
-In [5]:
-Dataframe contains stock prices between2010-01-07 00:00:00)2019-12-03 00:00:00
-Total days=3617days
-In [6]:
-Out[6]:
-Open High Low Close Adj Close Volume
-count 2193.000000 2193.000000 2193.000000 2193.000000 2193.000000 2.193000e+03
-mean 175.652882 178.710262 172.412075 175.648555 175.648555 5.077449e+06
-std 115.580903 117.370092 113.654794 115.580771 115.580771 4.545398e+06
-min 16.139999 16.629999 14.980000 15.800000 15.800000 1.185000e+05
-25% 33.110001 33.910000 32.459999 33.160000 33.160000 1.577800e+06
-50% 204.990005 208.160004 201.669998 204.990005 204.990005 4.171700e+06
-75% 262.000000 265.329987 256.209991 261.739990 261.739990 6.885600e+06
-max 386.690002 389.609985 379.350006 385.000000 385.000000 3.716390e+07
-In [7]:
-Out[7]:
-<AxesSubplot:>
-In [8]:
-In [9]:
-In [10]:
-In [12]:
-In [13]:
-In [14]:
-In [17]:
-Out[17]:
-LinearRegression()
-In [18]:
-In [19]:
-In [24]:
 File "C:\Users\18281\AppData\Local\Temp/ipykernel_33044/3581708429.py", line 3
 {'Metric'.1just(10)}{'Train'.center(20)}{'test'.center(20)}
 ^
